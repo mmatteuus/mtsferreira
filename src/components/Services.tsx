@@ -44,10 +44,11 @@ const Services = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              Serviços <span className="bg-gradient-primary bg-clip-text text-transparent">Profissionais</span>
+              Serviços <span className="bg-gradient-text bg-clip-text text-transparent">Profissionais</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Soluções completas em desenvolvimento e suporte técnico, adaptadas às suas necessidades específicas.
+              <span className="text-primary font-medium">Soluções completas</span> em desenvolvimento e suporte técnico, 
+              adaptadas às suas <span className="text-accent font-medium">necessidades específicas</span>.
             </p>
           </div>
 

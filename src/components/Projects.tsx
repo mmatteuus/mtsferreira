@@ -77,10 +77,12 @@ const Projects = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              Projetos de <span className="bg-gradient-primary bg-clip-text text-transparent">Impacto</span>
+              Projetos de <span className="bg-gradient-text bg-clip-text text-transparent animate-glow-pulse">Impacto</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Casos reais de sucesso que demonstram como a tecnologia pode transformar negócios e processos.
+              <span className="text-primary font-medium">Casos reais</span> de sucesso que demonstram como a 
+              <span className="text-accent font-medium"> tecnologia</span> pode 
+              <span className="text-purple font-medium"> transformar negócios</span> e processos.
             </p>
           </div>
 

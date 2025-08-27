@@ -55,10 +55,12 @@ const Contact = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              Vamos conversar sobre seu <span className="bg-gradient-primary bg-clip-text text-transparent">projeto</span>
+              Vamos conversar sobre seu <span className="bg-gradient-text bg-clip-text text-transparent animate-glow-pulse">projeto</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Entre em contato para discutir como posso ajudar a resolver seus desafios tecnológicos.
+              Entre em contato para discutir como posso ajudar a 
+              <span className="text-primary font-medium"> resolver seus desafios</span> 
+              <span className="text-accent font-medium"> tecnológicos</span>.
             </p>
           </div>
 
