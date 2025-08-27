@@ -31,56 +31,31 @@ const About = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              Sobre <span className="bg-gradient-text bg-clip-text text-transparent">MtsFerreira</span>
+              Sobre <span className="bg-gradient-primary bg-clip-text text-transparent">MtsFerreira</span>
             </h2>
-            <p className="text-lg mb-2 max-w-2xl mx-auto text-white/90">
-              <span className="bg-gradient-primary bg-clip-text text-transparent font-semibold">
-                Engenheiro de Software
-              </span> com foco em soluções práticas e eficientes
-            </p>
-            <p className="text-base text-white/70 max-w-2xl mx-auto">
-              <span className="text-purple font-medium">Pós-graduado</span> em 
-              <span className="text-cyan font-medium"> Cloud Computing</span>, 
-              <span className="text-yellow font-medium"> Big Data</span> e 
-              <span className="text-orange font-medium"> Inteligência Artificial</span>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Engenheiro de software com foco em soluções práticas e eficientes para desafios tecnológicos complexos.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
             <div className="animate-slide-in">
-              <h3 className="font-heading text-2xl font-semibold mb-6">
-                <span className="bg-gradient-secondary bg-clip-text text-transparent">Experiência Técnica</span>
-              </h3>
-              <p className="text-white/80 mb-6 leading-relaxed">
-                Com mais de <span className="text-primary font-semibold">5 anos</span> desenvolvendo soluções tecnológicas, combino 
-                <span className="text-accent font-medium"> expertise técnica</span> com uma abordagem pragmática para entregar 
-                resultados que realmente fazem a diferença nos negócios.
+              <h3 className="font-heading text-2xl font-semibold mb-6">Experiência Técnica</h3>
+              <p className="text-muted-foreground mb-6 leading-relaxed">
+                Com mais de 5 anos desenvolvendo soluções tecnológicas, combino expertise técnica com 
+                uma abordagem pragmática para entregar resultados que realmente fazem a diferença nos negócios.
               </p>
-              <p className="text-white/80 mb-6 leading-relaxed">
-                Pós-graduado em <span className="text-cyan font-medium">Cloud Computing</span>, 
-                <span className="text-yellow font-medium"> Big Data</span> e 
-                <span className="text-orange font-medium"> Inteligência Artificial</span>. 
-                Especialista em <span className="text-purple font-medium">arquiteturas escaláveis</span>, desde aplicações web modernas 
-                até sistemas complexos de backend, sempre priorizando performance, segurança e manutenibilidade.
+              <p className="text-muted-foreground mb-6 leading-relaxed">
+                Especialista em arquiteturas escaláveis, desde aplicações web modernas até sistemas complexos 
+                de backend, sempre priorizando performance, segurança e manutenibilidade.
               </p>
               <div className="flex flex-wrap gap-2">
-                {[
-                  { name: 'JavaScript', color: 'text-yellow' },
-                  { name: 'TypeScript', color: 'text-primary' },
-                  { name: 'Python', color: 'text-accent' },
-                  { name: 'React', color: 'text-cyan' },
-                  { name: 'Node.js', color: 'text-accent' },
-                  { name: 'AWS', color: 'text-orange' },
-                  { name: 'Docker', color: 'text-primary' },
-                  { name: 'PostgreSQL', color: 'text-purple' },
-                  { name: 'AI/ML', color: 'text-orange' },
-                  { name: 'Big Data', color: 'text-yellow' }
-                ].map((tech) => (
+                {['JavaScript', 'TypeScript', 'Python', 'React', 'Node.js', 'AWS', 'Docker', 'PostgreSQL'].map((tech) => (
                   <span 
-                    key={tech.name}
-                    className={`px-3 py-1 bg-muted/30 rounded-full text-sm border border-border/30 hover:border-primary/30 transition-colors ${tech.color} font-medium hover:shadow-glow`}
+                    key={tech}
+                    className="px-3 py-1 bg-muted/30 rounded-full text-sm border border-border/30 hover:border-primary/30 transition-colors"
                   >
-                    {tech.name}
+                    {tech}
                   </span>
                 ))}
               </div>
@@ -90,26 +65,20 @@ const About = () => {
               {skills.map((skill, index) => (
                 <Card key={index} className="p-4 bg-card/50 backdrop-blur-sm border-border/30 hover:border-primary/30 transition-all duration-300 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                   <skill.icon className="h-8 w-8 text-primary mb-3" />
-                  <h4 className="font-semibold mb-2 text-sm text-white">{skill.title}</h4>
-                  <p className="text-xs text-white/70">{skill.description}</p>
+                  <h4 className="font-semibold mb-2 text-sm">{skill.title}</h4>
+                  <p className="text-xs text-muted-foreground">{skill.description}</p>
                 </Card>
               ))}
             </div>
           </div>
 
           <div className="text-center">
-            <Card className="p-8 bg-gradient-primary/10 backdrop-blur-sm border-primary/20 max-w-4xl mx-auto animate-glow-pulse">
-              <h3 className="font-heading text-xl font-semibold mb-4 bg-gradient-secondary bg-clip-text text-transparent">
-                Metodologia de Trabalho
-              </h3>
-              <p className="text-white/70 leading-relaxed">
-                <strong className="bg-gradient-accent bg-clip-text text-transparent">
-                  Análise → Planejamento → Desenvolvimento → Testes → Entrega → Suporte
-                </strong>
+            <Card className="p-8 bg-gradient-primary/10 backdrop-blur-sm border-primary/20 max-w-4xl mx-auto">
+              <h3 className="font-heading text-xl font-semibold mb-4">Metodologia de Trabalho</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                <strong className="text-foreground">Análise → Planejamento → Desenvolvimento → Testes → Entrega → Suporte</strong>
                 <br />
-                Processo estruturado que garante <span className="text-primary font-medium">qualidade</span>, 
-                <span className="text-accent font-medium"> prazos cumpridos</span> e total 
-                <span className="text-purple font-medium"> transparência</span> durante todo o projeto.
+                Processo estruturado que garante qualidade, prazos cumpridos e total transparência durante todo o projeto.
               </p>
             </Card>
           </div>

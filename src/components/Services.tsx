@@ -44,11 +44,10 @@ const Services = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              Serviços <span className="bg-gradient-text bg-clip-text text-transparent">Profissionais</span>
+              Serviços <span className="bg-gradient-primary bg-clip-text text-transparent">Profissionais</span>
             </h2>
-            <p className="text-lg text-white/80 max-w-2xl mx-auto">
-              <span className="text-primary font-medium">Soluções completas</span> em desenvolvimento e suporte técnico, 
-              adaptadas às suas <span className="text-accent font-medium">necessidades específicas</span>.
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Soluções completas em desenvolvimento e suporte técnico, adaptadas às suas necessidades específicas.
             </p>
           </div>
 
@@ -68,13 +67,13 @@ const Services = () => {
                   </div>
                 </div>
                 
-                <p className="text-white/80 mb-6 leading-relaxed">
+                <p className="text-muted-foreground mb-6 leading-relaxed">
                   {service.description}
                 </p>
                 
                 <ul className="space-y-2 mb-6">
                   {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center gap-2 text-sm text-white/70">
+                    <li key={featureIndex} className="flex items-center gap-2 text-sm">
                       <div className="w-1.5 h-1.5 bg-primary rounded-full" />
                       {feature}
                     </li>
@@ -99,15 +98,15 @@ const Services = () => {
               <div className="grid md:grid-cols-3 gap-6 text-center">
                 <div>
                   <div className="text-2xl font-bold text-accent mb-1">30 dias</div>
-                  <div className="text-sm text-white/70">Garantia em correções</div>
+                  <div className="text-sm text-muted-foreground">Garantia em correções</div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-accent mb-1">24/7</div>
-                  <div className="text-sm text-white/70">Suporte de emergência</div>
+                  <div className="text-sm text-muted-foreground">Suporte de emergência</div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-accent mb-1">100%</div>
-                  <div className="text-sm text-white/70">Satisfação garantida</div>
+                  <div className="text-sm text-muted-foreground">Satisfação garantida</div>
                 </div>
               </div>
 

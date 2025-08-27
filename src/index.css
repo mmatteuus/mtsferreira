@@ -39,23 +39,12 @@ All colors MUST be HSL.
     
     --radius: 0.75rem;
     
-    /* Custom design tokens - Enhanced with more colors */
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(142 76% 36%), hsl(280 100% 70%));
-    --gradient-secondary: linear-gradient(135deg, hsl(280 100% 70%), hsl(217 91% 60%));
-    --gradient-accent: linear-gradient(135deg, hsl(142 76% 36%), hsl(45 100% 60%));
+    /* Custom design tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(142 76% 36%));
     --gradient-dark: linear-gradient(135deg, hsl(220 13% 9%), hsl(220 13% 12%));
-    --gradient-text: linear-gradient(135deg, hsl(217 91% 60%), hsl(142 76% 36%), hsl(280 100% 70%), hsl(45 100% 60%));
     --shadow-glow: 0 0 30px hsl(217 91% 60% / 0.3);
-    --shadow-glow-purple: 0 0 30px hsl(280 100% 70% / 0.3);
-    --shadow-glow-green: 0 0 30px hsl(142 76% 36% / 0.3);
     --shadow-soft: 0 4px 20px hsl(220 13% 5% / 0.4);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    
-    /* Additional vibrant colors */
-    --purple: 280 100% 70%;
-    --orange: 25 100% 60%;
-    --yellow: 45 100% 60%;
-    --cyan: 180 100% 60%;
     
     /* Typography scale */
     --font-heading: 'Inter', system-ui, sans-serif;

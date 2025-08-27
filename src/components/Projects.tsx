@@ -77,12 +77,10 @@ const Projects = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              Projetos de <span className="bg-gradient-text bg-clip-text text-transparent animate-glow-pulse">Impacto</span>
+              Projetos de <span className="bg-gradient-primary bg-clip-text text-transparent">Impacto</span>
             </h2>
-            <p className="text-lg text-white/80 max-w-2xl mx-auto">
-              <span className="text-primary font-medium">Casos reais</span> de sucesso que demonstram como a 
-              <span className="text-accent font-medium"> tecnologia</span> pode 
-              <span className="text-purple font-medium"> transformar negócios</span> e processos.
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Casos reais de sucesso que demonstram como a tecnologia pode transformar negócios e processos.
             </p>
           </div>
 
@@ -108,7 +106,7 @@ const Projects = () => {
                         <Badge variant="outline" className="mb-2 border-red-500/30 text-red-400">
                           Problema
                         </Badge>
-                        <p className="text-white/80 text-sm leading-relaxed">
+                        <p className="text-muted-foreground text-sm leading-relaxed">
                           {project.problem}
                         </p>
                       </div>
@@ -117,7 +115,7 @@ const Projects = () => {
                         <Badge variant="outline" className="mb-2 border-blue-500/30 text-blue-400">
                           Solução
                         </Badge>
-                        <p className="text-white/80 text-sm leading-relaxed">
+                        <p className="text-muted-foreground text-sm leading-relaxed">
                           {project.solution}
                         </p>
                       </div>
@@ -126,7 +124,7 @@ const Projects = () => {
                         <Badge variant="outline" className="mb-2 border-green-500/30 text-green-400">
                           Resultado
                         </Badge>
-                        <p className="text-white/80 text-sm leading-relaxed font-medium">
+                        <p className="text-muted-foreground text-sm leading-relaxed font-medium">
                           {project.result}
                         </p>
                       </div>
@@ -143,8 +141,8 @@ const Projects = () => {
 
                   {/* CTA Section */}
                   <div className="flex flex-col justify-center items-center text-center p-6 bg-gradient-primary/5 rounded-lg border border-primary/10">
-                    <h4 className="font-semibold mb-3 text-white">Projeto similar?</h4>
-                    <p className="text-sm text-white/70 mb-4">
+                    <h4 className="font-semibold mb-3">Projeto similar?</h4>
+                    <p className="text-sm text-muted-foreground mb-4">
                       Vamos conversar sobre como posso ajudar seu negócio.
                     </p>
                     <Button variant="outline" size="sm" onClick={openWhatsApp} className="group-hover:border-primary/50">
@@ -159,10 +157,10 @@ const Projects = () => {
 
           <div className="text-center">
             <Card className="p-8 bg-gradient-primary/10 backdrop-blur-sm border-primary/20 max-w-4xl mx-auto">
-              <h3 className="font-heading text-2xl font-semibold mb-4 text-white">
+              <h3 className="font-heading text-2xl font-semibold mb-4">
                 Pronto para transformar seu negócio?
               </h3>
-              <p className="text-white/80 mb-6 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-muted-foreground mb-6 max-w-2xl mx-auto leading-relaxed">
                 Cada projeto é único. Vamos analisar seu desafio específico e desenvolver a solução ideal 
                 para suas necessidades, com o mesmo cuidado e qualidade dos casos apresentados.
               </p>
