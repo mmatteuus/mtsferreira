@@ -33,12 +33,12 @@ const About = () => {
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               Sobre <span className="bg-gradient-text bg-clip-text text-transparent">MtsFerreira</span>
             </h2>
-            <p className="text-lg mb-2 max-w-2xl mx-auto">
+            <p className="text-lg mb-2 max-w-2xl mx-auto text-white/90">
               <span className="bg-gradient-primary bg-clip-text text-transparent font-semibold">
                 Engenheiro de Software
               </span> com foco em soluções práticas e eficientes
             </p>
-            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base text-white/70 max-w-2xl mx-auto">
               <span className="text-purple font-medium">Pós-graduado</span> em 
               <span className="text-cyan font-medium"> Cloud Computing</span>, 
               <span className="text-yellow font-medium"> Big Data</span> e 
@@ -51,12 +51,12 @@ const About = () => {
               <h3 className="font-heading text-2xl font-semibold mb-6">
                 <span className="bg-gradient-secondary bg-clip-text text-transparent">Experiência Técnica</span>
               </h3>
-              <p className="text-muted-foreground mb-6 leading-relaxed">
+              <p className="text-white/80 mb-6 leading-relaxed">
                 Com mais de <span className="text-primary font-semibold">5 anos</span> desenvolvendo soluções tecnológicas, combino 
                 <span className="text-accent font-medium"> expertise técnica</span> com uma abordagem pragmática para entregar 
                 resultados que realmente fazem a diferença nos negócios.
               </p>
-              <p className="text-muted-foreground mb-6 leading-relaxed">
+              <p className="text-white/80 mb-6 leading-relaxed">
                 Pós-graduado em <span className="text-cyan font-medium">Cloud Computing</span>, 
                 <span className="text-yellow font-medium"> Big Data</span> e 
                 <span className="text-orange font-medium"> Inteligência Artificial</span>. 
@@ -90,8 +90,8 @@ const About = () => {
               {skills.map((skill, index) => (
                 <Card key={index} className="p-4 bg-card/50 backdrop-blur-sm border-border/30 hover:border-primary/30 transition-all duration-300 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                   <skill.icon className="h-8 w-8 text-primary mb-3" />
-                  <h4 className="font-semibold mb-2 text-sm">{skill.title}</h4>
-                  <p className="text-xs text-muted-foreground">{skill.description}</p>
+                  <h4 className="font-semibold mb-2 text-sm text-white">{skill.title}</h4>
+                  <p className="text-xs text-white/70">{skill.description}</p>
                 </Card>
               ))}
             </div>
@@ -102,7 +102,7 @@ const About = () => {
               <h3 className="font-heading text-xl font-semibold mb-4 bg-gradient-secondary bg-clip-text text-transparent">
                 Metodologia de Trabalho
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-white/70 leading-relaxed">
                 <strong className="bg-gradient-accent bg-clip-text text-transparent">
                   Análise → Planejamento → Desenvolvimento → Testes → Entrega → Suporte
                 </strong>

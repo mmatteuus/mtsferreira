@@ -15,7 +15,7 @@ const Footer = () => {
                 <Code className="h-6 w-6 text-primary" />
                 <span className="font-heading font-bold text-lg">MtsFerreira</span>
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+              <p className="text-sm text-white/80 leading-relaxed mb-4">
                 Engenheiro de Software especializado em soluções sob demanda, 
                 suporte técnico e desenvolvimento de aplicações robustas.
               </p>
@@ -38,32 +38,31 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Services */}
             <div>
-              <h3 className="font-semibold mb-4">Serviços</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
+              <h3 className="font-semibold mb-4 text-white">Serviços</h3>
+              <ul className="space-y-2 text-sm text-white/70">
                 <li>
-                  <a href="#servicos" className="hover:text-foreground transition-colors">
+                  <a href="#servicos" className="hover:text-white transition-colors">
                     Desenvolvimento Web
                   </a>
                 </li>
                 <li>
-                  <a href="#servicos" className="hover:text-foreground transition-colors">
+                  <a href="#servicos" className="hover:text-white transition-colors">
                     Aplicações Mobile
                   </a>
                 </li>
                 <li>
-                  <a href="#servicos" className="hover:text-foreground transition-colors">
+                  <a href="#servicos" className="hover:text-white transition-colors">
                     Suporte Técnico
                   </a>
                 </li>
                 <li>
-                  <a href="#servicos" className="hover:text-foreground transition-colors">
+                  <a href="#servicos" className="hover:text-white transition-colors">
                     Manutenção de Sistemas
                   </a>
                 </li>
                 <li>
-                  <a href="#servicos" className="hover:text-foreground transition-colors">
+                  <a href="#servicos" className="hover:text-white transition-colors">
                     Consultoria Técnica
                   </a>
                 </li>
@@ -72,25 +71,25 @@ const Footer = () => {
 
             {/* Quick Links */}
             <div>
-              <h3 className="font-semibold mb-4">Links Rápidos</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
+              <h3 className="font-semibold mb-4 text-white">Links Rápidos</h3>
+              <ul className="space-y-2 text-sm text-white/70">
                 <li>
-                  <a href="#sobre" className="hover:text-foreground transition-colors">
+                  <a href="#sobre" className="hover:text-white transition-colors">
                     Sobre
                   </a>
                 </li>
                 <li>
-                  <a href="#servicos" className="hover:text-foreground transition-colors">
+                  <a href="#servicos" className="hover:text-white transition-colors">
                     Serviços
                   </a>
                 </li>
                 <li>
-                  <a href="#projetos" className="hover:text-foreground transition-colors">
+                  <a href="#projetos" className="hover:text-white transition-colors">
                     Projetos
                   </a>
                 </li>
                 <li>
-                  <a href="#contato" className="hover:text-foreground transition-colors">
+                  <a href="#contato" className="hover:text-white transition-colors">
                     Contato
                   </a>
                 </li>
@@ -99,7 +98,7 @@ const Footer = () => {
                     href="https://wa.me/5563992476987" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="hover:text-foreground transition-colors"
+                    className="hover:text-white transition-colors"
                   >
                     Orçamento
                   </a>
@@ -109,8 +108,8 @@ const Footer = () => {
 
             {/* Contact Info */}
             <div>
-              <h3 className="font-semibold mb-4">Contato</h3>
-              <div className="space-y-3 text-sm text-muted-foreground">
+              <h3 className="font-semibold mb-4 text-white">Contato</h3>
+              <div className="space-y-3 text-sm text-white/70">
                 <div className="flex items-center gap-2">
                   <Phone className="h-3 w-3" />
                   <span>(63) 99247-6987</span>
@@ -126,7 +125,7 @@ const Footer = () => {
               </div>
               
               <div className="mt-4 p-3 bg-primary/5 rounded-lg border border-primary/10">
-                <p className="text-xs text-muted-foreground mb-2">Emergências 24h:</p>
+                <p className="text-xs text-white/70 mb-2">Emergências 24h:</p>
                 <Button 
                   variant="outline" 
                   size="sm" 
@@ -144,13 +143,13 @@ const Footer = () => {
           {/* Bottom */}
           <div className="pt-8 border-t border-border/30">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <p className="text-sm text-muted-foreground">
-                © {currentYear} Desenvolvido por <span className="font-semibold text-foreground">MtsFerreira</span>. 
+              <p className="text-sm text-white/70">
+                © {currentYear} Desenvolvido por <span className="font-semibold text-white">MtsFerreira</span>. 
                 Todos os direitos reservados.
               </p>
-              <div className="flex items-center gap-4 text-xs text-muted-foreground">
+              <div className="flex items-center gap-4 text-xs text-white/70">
                 <span>Palmas/TO, Brasil</span>
-                <div className="w-1 h-1 bg-muted-foreground rounded-full" />
+                <div className="w-1 h-1 bg-white/70 rounded-full" />
                 <span>Disponível para projetos</span>
                 <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
               </div>
