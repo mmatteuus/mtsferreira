@@ -1,26 +1,23 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Download, MessageSquare } from 'lucide-react';
 import heroImage from '@/assets/hero-image.jpg';
-
 const Hero = () => {
   const scrollToContact = () => {
     const element = document.getElementById('contato');
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
-
   const openWhatsApp = () => {
     window.open('https://wa.me/5563992476987', '_blank');
   };
-
-  return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+  return <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-dark opacity-90" />
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      />
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
+      backgroundImage: `url(${heroImage})`
+    }} />
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center animate-fade-in">
@@ -33,14 +30,9 @@ const Hero = () => {
             Engenheiro de Software
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground mb-4 max-w-2xl mx-auto">
-            Técnico em Desenvolvimento de Sistemas
-          </p>
+          <p className="text-xl md:text-2xl text-muted-foreground mb-4 max-w-2xl mx-auto">Desenvolvedor de Sistemas</p>
           
-          <p className="text-lg text-white mb-8 max-w-3xl mx-auto leading-relaxed">
-            Especialista em soluções tecnológicas sob demanda com suporte presencial e online. 
-            Desenvolvo aplicações robustas, ofereço manutenção contínua e resolvo problemas complexos com entrega rápida e garantida.
-          </p>
+          <p className="text-lg text-white mb-8 max-w-3xl mx-auto leading-relaxed">Especialista em soluções tecnológicas sob demanda com suporte presencial e online. Desenvolvemos aplicações robustas, ofereçemos manutenção resolução  de problemas complexos com entrega rápida e garantida.</p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button variant="hero" size="xl" onClick={openWhatsApp} className="animate-glow-pulse">
@@ -80,8 +72,6 @@ const Hero = () => {
           <div className="w-1 h-3 bg-muted-foreground rounded-full mt-2 animate-pulse" />
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
