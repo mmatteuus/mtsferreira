@@ -33,6 +33,9 @@ const Header = () => {
             <Button variant="nav" onClick={() => scrollToSection('projetos')}>
               Projetos
             </Button>
+            <Button variant="nav" onClick={() => scrollToSection('pesquisar-os')}>
+              Pesquisar O.S
+            </Button>
             <Button variant="nav" onClick={() => scrollToSection('contato')}>
               Contato
             </Button>
@@ -69,6 +72,9 @@ const Header = () => {
               </Button>
               <Button variant="nav" onClick={() => scrollToSection('projetos')} className="justify-start">
                 Projetos
+              </Button>
+              <Button variant="nav" onClick={() => scrollToSection('pesquisar-os')} className="justify-start">
+                Pesquisar O.S
               </Button>
               <Button variant="nav" onClick={() => scrollToSection('contato')} className="justify-start">
                 Contato
