@@ -37,7 +37,7 @@ const Hero = () => {
             Técnico em Desenvolvimento de Sistemas
           </p>
           
-          <p className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-white mb-8 max-w-3xl mx-auto leading-relaxed">
             Especialista em soluções tecnológicas sob demanda com suporte presencial e online. 
             Desenvolvo aplicações robustas, ofereço manutenção contínua e resolvo problemas complexos com entrega rápida e garantida.
           </p>
