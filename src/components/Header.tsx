@@ -41,20 +41,8 @@ const Header = () => {
           {/* Social Links & Mobile Menu */}
           <div className="flex items-center gap-4">
             <div className="hidden md:flex items-center gap-2">
-              <Button variant="ghost" size="icon" asChild>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-                  <Github className="h-4 w-4" />
-                </a>
-              </Button>
-              <Button variant="ghost" size="icon" asChild>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                  <Linkedin className="h-4 w-4" />
-                </a>
-              </Button>
-              <Button variant="ghost" size="icon" asChild>
-                <a href="https://behance.net" target="_blank" rel="noopener noreferrer">
-                  <Palette className="h-4 w-4" />
-                </a>
+              <Button variant="outline" className="text-white border-white/20 hover:bg-white/10">
+                Acessar
               </Button>
             </div>
 
