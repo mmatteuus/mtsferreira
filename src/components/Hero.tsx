@@ -17,7 +17,7 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-dark opacity-90" aria-hidden="true" />
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
       backgroundImage: `url(${heroImage})`
-    }} role="img" aria-label="Imagem de fundo de um desenvolvedor trabalhando em frente ao computador" />
+    }} role="img" aria-label="Imagem de um desenvolvedor programando no computador" />
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center animate-fade-in">
