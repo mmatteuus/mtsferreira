@@ -1,7 +1,7 @@
 import { useMemo, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { osStorage } from "@/lib/osStorage";
-import { calcOrderTotal } from "@/features/os/utils";
+import { calcOrderTotal, formatBRL } from "@/features/os/utils";
 
 export default function OrderReceipt() {
   const { id } = useParams();
@@ -29,7 +29,7 @@ export default function OrderReceipt() {
           <p><strong>Data:</strong> {new Date().toLocaleString()}</p>
           <p><strong>Cliente:</strong> {client?.name || order.clientId}</p>
         </div>
-        <p className="mt-4 text-sm">Recebi de {client?.name || order.clientId} a quantia de <strong>R$ {total.toFixed(2)}</strong> referente aos serviços/produtos descritos na O.S {order.number}.</p>
+        <p className="mt-4 text-sm">Recebi de {client?.name || order.clientId} a quantia de <strong>{formatBRL(total)}</strong> referente aos serviços/produtos descritos na O.S {order.number}.</p>
         <div className="mt-6 flex flex-col items-center">
           {order.customerSignatureDataUrl ? (
             <img src={order.customerSignatureDataUrl} alt="Assinatura" className="h-24 object-contain" />
@@ -48,4 +48,3 @@ export default function OrderReceipt() {
     </div>
   );
 }
-

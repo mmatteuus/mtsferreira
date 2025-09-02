@@ -13,6 +13,15 @@ export function calcOrderTotal(order: ServiceOrder): number {
   return Math.max(0, Math.round((itemsTotal + fees - discount) * 100) / 100);
 }
 
+export function formatBRL(value: number | undefined | null): string {
+  const n = Number(value || 0);
+  try {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(n);
+  } catch {
+    return `R$ ${n.toFixed(2)}`;
+  }
+}
+
 export function toCSV(rows: Record<string, any>[], headers?: string[]): string {
   if (!rows.length) return "";
   const keys = headers || Object.keys(rows[0]);
@@ -36,4 +45,3 @@ export function downloadCSV(filename: string, csv: string) {
   a.click();
   URL.revokeObjectURL(url);
 }
-

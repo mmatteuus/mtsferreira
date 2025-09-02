@@ -5,11 +5,22 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 export default function Clients() {
   const [clients, setClients] = useState<WithTimestamps<Client>[]>([]);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [confirmId, setConfirmId] = useState<string | null>(null);
 
   const reload = () => setClients(osStorage.listClients());
 
@@ -26,7 +37,6 @@ export default function Clients() {
   };
 
   const remove = (id: string) => {
-    if (!confirm("Remover este cliente?")) return;
     osStorage.deleteClient(id);
     reload();
   };
@@ -64,7 +74,7 @@ export default function Clients() {
                 <TableCell>{c.phone || "-"}</TableCell>
                 <TableCell>{new Date(c.createdAt).toLocaleString()}</TableCell>
                 <TableCell className="text-right">
-                  <Button size="sm" variant="destructive" onClick={() => remove(c.id)}>
+                  <Button size="sm" variant="destructive" onClick={() => setConfirmId(c.id)}>
                     Remover
                   </Button>
                 </TableCell>
@@ -80,7 +90,18 @@ export default function Clients() {
           </TableBody>
         </Table>
       </div>
+      <AlertDialog open={Boolean(confirmId)} onOpenChange={(v) => { if (!v) setConfirmId(null); }}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Remover cliente</AlertDialogTitle>
+            <AlertDialogDescription>Tem certeza que deseja remover este cliente? Esta ação não poderá ser desfeita.</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction onClick={() => { if (confirmId) { remove(confirmId); setConfirmId(null); } }}>Remover</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
-

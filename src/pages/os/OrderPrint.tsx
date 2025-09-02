@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { osStorage } from "@/lib/osStorage";
-import { calcItemTotal, calcOrderTotal } from "@/features/os/utils";
+import { calcItemTotal, calcOrderTotal, formatBRL } from "@/features/os/utils";
 
 export default function OrderPrint() {
   const { id } = useParams();
@@ -46,16 +46,16 @@ export default function OrderPrint() {
                 <td>{it.kind}</td>
                 <td>{it.description}</td>
                 <td>{it.quantity}</td>
-                <td>R$ {Number(it.unitPrice).toFixed(2)}</td>
-                <td>R$ {calcItemTotal(it).toFixed(2)}</td>
+                <td>{formatBRL(Number(it.unitPrice))}</td>
+                <td>{formatBRL(calcItemTotal(it))}</td>
               </tr>
             ))}
           </tbody>
         </table>
         <div className="mt-4 text-right text-sm">
-          <p>Desconto: R$ {(order.discount || 0).toFixed(2)}</p>
-          <p>Outros: R$ {(order.additionalFees || 0).toFixed(2)}</p>
-          <p className="font-semibold">Total: R$ {total.toFixed(2)}</p>
+          <p>Desconto: {formatBRL(order.discount || 0)}</p>
+          <p>Outros: {formatBRL(order.additionalFees || 0)}</p>
+          <p className="font-semibold">Total: {formatBRL(total)}</p>
         </div>
         <div className="no-print mt-6">
           <button onClick={() => window.print()} className="px-4 py-2 border rounded">Imprimir</button>
@@ -64,4 +64,3 @@ export default function OrderPrint() {
     </div>
   );
 }
-

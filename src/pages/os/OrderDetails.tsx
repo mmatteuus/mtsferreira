@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { osStorage } from "@/lib/osStorage";
 import type { Attachment, OrderItem, ServiceOrder, TimelineEntry } from "@/features/os/types";
-import { calcItemTotal, calcOrderTotal } from "@/features/os/utils";
+import { calcItemTotal, calcOrderTotal, formatBRL } from "@/features/os/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -204,13 +204,13 @@ export default function OrderDetails() {
                   <Input value={it.description} onChange={(e) => updateItem(i, { description: e.target.value })} />
                 </div>
                 <div className="col-span-1">
-                  <Input type="number" value={it.quantity} onChange={(e) => updateItem(i, { quantity: Number(e.target.value) })} />
+                  <Input type="number" min="0" step="1" value={it.quantity} onChange={(e) => updateItem(i, { quantity: Number(e.target.value) })} />
                 </div>
                 <div className="col-span-2">
-                  <Input type="number" value={it.unitPrice} onChange={(e) => updateItem(i, { unitPrice: Number(e.target.value) })} />
+                  <Input type="number" step="0.01" min="0" value={it.unitPrice} onChange={(e) => updateItem(i, { unitPrice: Number(e.target.value) })} />
                 </div>
                 <div className="col-span-1 text-right">
-                  R$ {calcItemTotal(it).toFixed(2)}
+                  {formatBRL(calcItemTotal(it))}
                 </div>
                 <div className="col-span-12 text-right">
                   <Button size="sm" variant="destructive" onClick={() => removeItem(i)}>Remover</Button>
@@ -222,18 +222,18 @@ export default function OrderDetails() {
               <div className="col-span-8" />
               <div className="col-span-2 text-right self-center">Desconto</div>
               <div className="col-span-2">
-                <Input type="number" value={order.discount || 0} onChange={(e) => setField("discount", Number(e.target.value))} />
+                <Input type="number" step="0.01" min="0" value={order.discount || 0} onChange={(e) => setField("discount", Number(e.target.value))} />
               </div>
 
               <div className="col-span-8" />
               <div className="col-span-2 text-right self-center">Outros</div>
               <div className="col-span-2">
-                <Input type="number" value={order.additionalFees || 0} onChange={(e) => setField("additionalFees", Number(e.target.value))} />
+                <Input type="number" step="0.01" min="0" value={order.additionalFees || 0} onChange={(e) => setField("additionalFees", Number(e.target.value))} />
               </div>
 
               <div className="col-span-8" />
               <div className="col-span-2 text-right font-semibold self-center">Total</div>
-              <div className="col-span-2 font-semibold self-center text-right">R$ {total.toFixed(2)}</div>
+              <div className="col-span-2 font-semibold self-center text-right">{formatBRL(total)}</div>
             </div>
           </div>
         </div>

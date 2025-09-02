@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from "react";
+﻿import { useMemo, useState, useEffect } from "react";
 import type { WithTimestamps, ServiceOrder } from "@/features/os/types";
 import { osStorage } from "@/lib/osStorage";
 import { Button } from "@/components/ui/button";
@@ -7,6 +7,18 @@ import { Link } from "react-router-dom";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { downloadCSV, toCSV } from "@/features/os/utils";
+import { Badge } from "@/components/ui/badge";
+import { ArrowUpDown } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 type OsItem = WithTimestamps<ServiceOrder> & { clientName?: string };
 
@@ -19,9 +31,12 @@ export default function Orders() {
   const [to, setTo] = useState<string>("");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+  const [sortBy, setSortBy] = useState<"number" | "client" | "status" | "openedAt">("openedAt");
+  const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
+  const [confirmId, setConfirmId] = useState<string | null>(null);
 
   const saveFilters = () => {
-    const payload = { query, status, client, from, to, pageSize };
+    const payload = { query, status, client, from, to, pageSize, sortBy, sortDir };
     try { localStorage.setItem("os.orders.filters", JSON.stringify(payload)); } catch {}
   };
 
@@ -36,6 +51,8 @@ export default function Orders() {
         setFrom(f.from || "");
         setTo(f.to || "");
         setPageSize(f.pageSize || 10);
+        if (f.sortBy) setSortBy(f.sortBy);
+        if (f.sortDir) setSortDir(f.sortDir);
       }
     } catch {}
   }, []);
@@ -75,10 +92,38 @@ export default function Orders() {
     setPage(1); // reset page when filters change
   }, [query, status, client, from, to, pageSize]);
 
-  const pageCount = Math.max(1, Math.ceil(filtered.length / pageSize));
+  const sorted = useMemo(() => {
+    const arr = [...filtered];
+    const cmp = (a: OsItem, b: OsItem) => {
+      let av: any = "";
+      let bv: any = "";
+      switch (sortBy) {
+        case "number":
+          av = a.number; bv = b.number; break;
+        case "client":
+          av = a.clientName || a.clientId; bv = b.clientName || b.clientId; break;
+        case "status":
+          av = a.status; bv = b.status; break;
+        case "openedAt":
+        default:
+          av = a.openedAt; bv = b.openedAt; break;
+      }
+      if (av < bv) return sortDir === "asc" ? -1 : 1;
+      if (av > bv) return sortDir === "asc" ? 1 : -1;
+      return 0;
+    };
+    return arr.sort(cmp);
+  }, [filtered, sortBy, sortDir]);
+
+  const pageCount = Math.max(1, Math.ceil(sorted.length / pageSize));
   const currentPage = Math.min(page, pageCount);
   const start = (currentPage - 1) * pageSize;
-  const paged = filtered.slice(start, start + pageSize);
+  const paged = sorted.slice(start, start + pageSize);
+
+  const toggleSort = (key: typeof sortBy) => {
+    if (sortBy === key) setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    else { setSortBy(key); setSortDir("asc"); }
+  };
 
   const exportCsv = () => {
     const rows = filtered.map((o) => ({
@@ -109,7 +154,7 @@ export default function Orders() {
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <Input
-          placeholder="Buscar por número, cliente, equipamento..."
+          placeholder="Buscar por nÃºmero, cliente, equipamento..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           className="max-w-sm"
@@ -146,13 +191,21 @@ export default function Orders() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Número</TableHead>
-              <TableHead>Cliente</TableHead>
-              <TableHead>Status</TableHead>
+              <TableHead>
+                <button className="inline-flex items-center gap-1" onClick={() => toggleSort("number")}>NÃºmero <ArrowUpDown className="h-3 w-3" /></button>
+              </TableHead>
+              <TableHead>
+                <button className="inline-flex items-center gap-1" onClick={() => toggleSort("client")}>Cliente <ArrowUpDown className="h-3 w-3" /></button>
+              </TableHead>
+              <TableHead>
+                <button className="inline-flex items-center gap-1" onClick={() => toggleSort("status")}>Status <ArrowUpDown className="h-3 w-3" /></button>
+              </TableHead>
               <TableHead>Prioridade</TableHead>
-              <TableHead>Abertura</TableHead>
+              <TableHead>
+                <button className="inline-flex items-center gap-1" onClick={() => toggleSort("openedAt")}>Abertura <ArrowUpDown className="h-3 w-3" /></button>
+              </TableHead>
               <TableHead>Equipamento</TableHead>
-              <TableHead className="text-right">Ações</TableHead>
+              <TableHead className="text-right">AÃ§Ãµes</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -160,7 +213,7 @@ export default function Orders() {
               <TableRow key={o.id}>
                 <TableCell className="font-medium"><Link className="underline" to={`/os/${o.id}`}>{o.number}</Link></TableCell>
                 <TableCell>{o.clientName || o.clientId}</TableCell>
-                <TableCell className="capitalize">{o.status.replaceAll("_", " ")}</TableCell>
+                <TableCell><StatusChip status={o.status} /></TableCell>
                 <TableCell className="capitalize">{o.priority || "-"}</TableCell>
                 <TableCell>{new Date(o.openedAt).toLocaleString()}</TableCell>
                 <TableCell>{o.equipment || "-"}</TableCell>
@@ -170,7 +223,7 @@ export default function Orders() {
                       Finalizar
                     </Button>
                   )}
-                  <Button size="sm" variant="destructive" onClick={() => remove(o.id)}>
+                  <Button size="sm" variant="destructive" onClick={() => setConfirmId(o.id)}>
                     Remover
                   </Button>
                 </TableCell>
@@ -186,6 +239,19 @@ export default function Orders() {
           </TableBody>
         </Table>
       </div>
+
+      <AlertDialog open={Boolean(confirmId)} onOpenChange={(v) => { if (!v) setConfirmId(null); }}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Remover O.S</AlertDialogTitle>
+            <AlertDialogDescription>Tem certeza que deseja remover esta O.S? Esta ação não poderá ser desfeita.</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction onClick={() => { if (confirmId) { osStorage.deleteOrder(confirmId); setConfirmId(null); reload(); } }}>Remover</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
       <div className="flex items-center justify-between text-sm">
         <div className="text-muted-foreground">
@@ -204,10 +270,30 @@ export default function Orders() {
           <div className="flex items-center gap-1">
             <Button variant="outline" size="sm" disabled={currentPage <= 1} onClick={() => setPage((p) => Math.max(1, p - 1))}>Anterior</Button>
             <span className="px-2">{currentPage}/{pageCount}</span>
-            <Button variant="outline" size="sm" disabled={currentPage >= pageCount} onClick={() => setPage((p) => Math.min(pageCount, p + 1))}>Próxima</Button>
+            <Button variant="outline" size="sm" disabled={currentPage >= pageCount} onClick={() => setPage((p) => Math.min(pageCount, p + 1))}>PrÃ³xima</Button>
           </div>
         </div>
       </div>
     </div>
   );
+}
+
+function StatusChip({ status }: { status: ServiceOrder["status"] }) {
+  const labelMap: Record<ServiceOrder["status"], string> = {
+    aberta: "Aberta",
+    em_andamento: "Em andamento",
+    aguardando_peca: "Aguardando peça",
+    aguardando_aprovacao: "Aguardando aprovação",
+    finalizada: "Finalizada",
+    cancelada: "Cancelada",
+  };
+  const colorMap: Record<ServiceOrder["status"], string> = {
+    aberta: "bg-sky-100 text-sky-800 dark:bg-sky-900/30 dark:text-sky-300",
+    em_andamento: "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300",
+    aguardando_peca: "bg-violet-100 text-violet-800 dark:bg-violet-900/30 dark:text-violet-300",
+    aguardando_aprovacao: "bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300",
+    finalizada: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300",
+    cancelada: "bg-rose-100 text-rose-800 dark:bg-rose-900/30 dark:text-rose-300",
+  };
+  return <Badge className={colorMap[status]}>{labelMap[status]}</Badge>;
 }
