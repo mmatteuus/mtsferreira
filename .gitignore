@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Env files
+.env
+.env.*
+!.env.example
+
 # Keep external repo folder untracked
 sistema-gestao-os/
 

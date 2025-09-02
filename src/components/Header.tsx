@@ -56,6 +56,8 @@ const Header = () => {
               size="icon"
               className="md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label={isMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+              data-testid="menu-toggle"
             >
               {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </Button>
@@ -64,7 +66,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-border pt-4">
+          <div className="md:hidden mt-4 pb-4 border-t border-border pt-4" data-testid="mobile-nav">
             <div className="flex flex-col gap-4">
               <Button variant="nav" onClick={() => scrollToSection('sobre')} className="justify-start">
                 Sobre
