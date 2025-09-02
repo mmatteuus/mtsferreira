@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { downloadCSV, toCSV } from "@/features/os/utils";
+import { calcOrderTotal } from "@/features/os/utils";
 import { Badge } from "@/components/ui/badge";
 import { ArrowUpDown } from "lucide-react";
 import {
@@ -34,9 +35,10 @@ export default function Orders() {
   const [sortBy, setSortBy] = useState<"number" | "client" | "status" | "openedAt">("openedAt");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
   const [confirmId, setConfirmId] = useState<string | null>(null);
+  const [paidFilter, setPaidFilter] = useState<"" | "paid" | "unpaid">("");
 
   const saveFilters = () => {
-    const payload = { query, status, client, from, to, pageSize, sortBy, sortDir };
+    const payload = { query, status, client, from, to, pageSize, sortBy, sortDir, paidFilter };
     try { localStorage.setItem("os.orders.filters", JSON.stringify(payload)); } catch {}
   };
 
@@ -53,6 +55,7 @@ export default function Orders() {
         setPageSize(f.pageSize || 10);
         if (f.sortBy) setSortBy(f.sortBy);
         if (f.sortDir) setSortDir(f.sortDir);
+        if (f.paidFilter) setPaidFilter(f.paidFilter);
       }
     } catch {}
   }, []);
@@ -83,14 +86,16 @@ export default function Orders() {
       const t = to ? new Date(to).getTime() : Number.MAX_SAFE_INTEGER;
       const opened = new Date(o.openedAt).getTime();
       const matchesDate = opened >= f && opened <= t;
-      return matchesQ && matchesStatus && matchesClient && matchesDate;
+      const isPaid = Boolean(o.paid);
+      const matchesPaid = !paidFilter || (paidFilter === "paid" ? isPaid : !isPaid);
+      return matchesQ && matchesStatus && matchesClient && matchesDate && matchesPaid;
     });
   }, [orders, query, status, client, from, to]);
 
   useEffect(() => {
     saveFilters();
     setPage(1); // reset page when filters change
-  }, [query, status, client, from, to, pageSize]);
+  }, [query, status, client, from, to, pageSize, paidFilter]);
 
   const sorted = useMemo(() => {
     const arr = [...filtered];
@@ -142,6 +147,21 @@ export default function Orders() {
     downloadCSV("os_export.csv", csv);
   };
 
+  const markPaid = (id: string) => {
+    const all = osStorage.listOrders();
+    const o = all.find(x => x.id === id);
+    if (!o) return;
+    const now = new Date().toISOString();
+    const received = typeof o.paymentReceived === 'number' ? o.paymentReceived! : calcOrderTotal(o);
+    osStorage.updateOrder(id, {
+      paid: true,
+      paymentDate: now,
+      paymentMethod: o.paymentMethod || 'dinheiro',
+      paymentReceived: received,
+    });
+    reload();
+  };
+
   const finalize = (id: string) => {
     osStorage.updateOrder(id, { status: "finalizada", closedAt: new Date().toISOString() });
     reload();
@@ -179,6 +199,14 @@ export default function Orders() {
               {osStorage.listClients().map((c) => (
                 <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
               ))}
+            </SelectContent>
+          </Select>
+          <Select value={paidFilter} onValueChange={(v) => setPaidFilter(v as any)}>
+            <SelectTrigger className="w-[160px]"><SelectValue placeholder="Pagamento" /></SelectTrigger>
+            <SelectContent>
+              <SelectItem value="">Todos</SelectItem>
+              <SelectItem value="paid">Pago</SelectItem>
+              <SelectItem value="unpaid">Em aberto</SelectItem>
             </SelectContent>
           </Select>
           <Input type="date" value={from} onChange={(e) => setFrom(e.target.value)} />
@@ -232,6 +260,11 @@ export default function Orders() {
                   {o.status !== "finalizada" && (
                     <Button size="sm" variant="secondary" onClick={() => finalize(o.id)}>
                       Finalizar
+                    </Button>
+                  )}
+                  {!o.paid && (
+                    <Button size="sm" variant="outline" onClick={() => markPaid(o.id)}>
+                      Marcar pago
                     </Button>
                   )}
                   <Button size="sm" variant="destructive" onClick={() => setConfirmId(o.id)}>
