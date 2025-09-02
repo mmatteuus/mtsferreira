@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Code, Github, Linkedin, Palette } from 'lucide-react';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -44,6 +45,7 @@ const Header = () => {
           {/* Social Links & Mobile Menu */}
           <div className="flex items-center gap-4">
             <div className="hidden md:flex items-center gap-2">
+              <ThemeToggle />
               <Button variant="outline" className="text-white border-white/20 hover:bg-white/10">
                 Acessar
               </Button>
@@ -80,6 +82,7 @@ const Header = () => {
                 Contato
               </Button>
               <div className="flex items-center gap-2 mt-4 pt-4 border-t border-border">
+                <ThemeToggle />
                 <Button variant="ghost" size="icon" asChild>
                   <a href="https://github.com" target="_blank" rel="noopener noreferrer">
                     <Github className="h-4 w-4" />

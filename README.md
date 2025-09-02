@@ -1,37 +1,59 @@
-# MtsFerreira — Vite + React + TypeScript
+# MtsFerreira - Engenheiro de Software
 
-Projeto front‑end com Vite, React, TypeScript, Tailwind e shadcn‑ui.
+## Descrição do Projeto
 
-## Requisitos
+Portfolio profissional de Mateus Ferreira, especializado em desenvolvimento de software, aplicações web e mobile, suporte técnico presencial e online, e manutenção de sistemas.
 
-- Node.js LTS e npm (ou pnpm/bun)
+## Tecnologias Utilizadas
 
-## Scripts
+Este projeto foi desenvolvido com:
+
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
+
+## Como executar localmente
+
+### Pré-requisitos
+
+- Node.js & npm instalados - instalar com nvm: https://github.com/nvm-sh/nvm#installing-and-updating
+
+### Passos para execução
 
 ```sh
-# instalar dependências
+# Passo 1: Clone o repositório
+git clone <YOUR_GIT_URL>
+
+# Passo 2: Navegue até o diretório do projeto
+cd <YOUR_PROJECT_NAME>
+
+# Passo 3: Instale as dependências
 npm i
 
-# rodar em desenvolvimento
+# Passo 4: Execute o servidor de desenvolvimento
 npm run dev
-
-# build de produção
-npm run build
-
-# preview do build
-npm run preview
 ```
 
-## Estrutura
+## Funcionalidades
 
-- `src/`: código da aplicação
-- `public/`: estáticos públicos (ex.: `favicon.svg`)
-- `index.html`: documento raiz com metas e assets
+- Página inicial: Apresentação profissional e serviços oferecidos
+- Sobre: Informações sobre experiência e especialidades
+- Projetos: Portfólio de trabalhos realizados
+- Serviços: Detalhamento dos serviços técnicos oferecidos
+- Contato: Formulário e informações para contato
 
-## Deploy
+## Serviços Oferecidos
 
-Pode ser publicado em Vercel, Netlify ou GitHub Pages. Gere o build com `npm run build` e sirva o conteúdo da pasta `dist/`.
+- Desenvolvimento de aplicações web e mobile
+- Suporte técnico presencial e online
+- Manutenção de sistemas
+- Soluções tecnológicas sob demanda
+- Consultoria em tecnologia
 
-## Licença
+## Contato
 
-Sem licença definida. Consulte o autor para uso/reuso.
+- Localização: Palmas/TO
+- Especialidades: Engenharia de Software, Desenvolvimento Full-Stack, Suporte Técnico
+
