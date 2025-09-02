@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 import { Menu, X, Code, Github, Linkedin, Palette } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
+import { useAuth } from '@/features/auth/AuthContext';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isAuthenticated } = useAuth();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -46,8 +49,8 @@ const Header = () => {
           <div className="flex items-center gap-4">
             <div className="hidden md:flex items-center gap-2">
               <ThemeToggle />
-              <Button variant="outline" className="text-white border-white/20 hover:bg-white/10">
-                Acessar
+              <Button variant="outline" className="text-white border-white/20 hover:bg-white/10" asChild>
+                <Link to={isAuthenticated ? "/os" : "/login"}>{isAuthenticated ? 'Área OS' : 'Acessar'}</Link>
               </Button>
             </div>
 
