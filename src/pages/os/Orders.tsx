@@ -134,6 +134,9 @@ export default function Orders() {
       abertura: new Date(o.openedAt).toLocaleString(),
       equipamento: o.equipment || "",
       descricao: o.description || "",
+      pago: o.paid ? "sim" : "nao",
+      valor_recebido: o.paymentReceived ?? "",
+      forma_pagamento: o.paymentMethod || "",
     }));
     const csv = toCSV(rows);
     downloadCSV("os_export.csv", csv);
@@ -205,6 +208,7 @@ export default function Orders() {
                 <button className="inline-flex items-center gap-1" onClick={() => toggleSort("openedAt")}>Abertura <ArrowUpDown className="h-3 w-3" /></button>
               </TableHead>
               <TableHead>Equipamento</TableHead>
+              <TableHead>Pagamento</TableHead>
               <TableHead className="text-right">AÃ§Ãµes</TableHead>
             </TableRow>
           </TableHeader>
@@ -217,6 +221,13 @@ export default function Orders() {
                 <TableCell className="capitalize">{o.priority || "-"}</TableCell>
                 <TableCell>{new Date(o.openedAt).toLocaleString()}</TableCell>
                 <TableCell>{o.equipment || "-"}</TableCell>
+                <TableCell>
+                  {o.paid ? (
+                    <Badge className="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300">Pago</Badge>
+                  ) : (
+                    <Badge className="bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300">Em aberto</Badge>
+                  )}
+                </TableCell>
                 <TableCell className="text-right space-x-2">
                   {o.status !== "finalizada" && (
                     <Button size="sm" variant="secondary" onClick={() => finalize(o.id)}>

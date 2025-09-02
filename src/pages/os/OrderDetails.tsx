@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import SignaturePad from "@/pages/os/SignaturePad";
+import { Switch } from "@/components/ui/switch";
 
 export default function OrderDetails() {
   const { id } = useParams();
@@ -102,6 +103,18 @@ export default function OrderDetails() {
     navigate(`/os`);
   };
 
+  const markPaid = () => {
+    const now = new Date().toISOString();
+    setOrder({
+      ...order,
+      paymentReceived: order.paymentReceived ?? total,
+      paymentMethod: order.paymentMethod || "dinheiro",
+      paid: true,
+      paymentDate: order.paymentDate || now,
+      timeline: [...(order.timeline || []), { id: crypto.randomUUID(), at: now, type: "nota", message: "Pagamento registrado" }],
+    });
+  };
+
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
@@ -116,6 +129,7 @@ export default function OrderDetails() {
           <Button variant="outline" asChild>
             <Link to={`/os/${order.id}/recibo`} target="_blank">Recibo</Link>
           </Button>
+          <Button variant="secondary" onClick={markPaid}>Marcar como pago</Button>
           <Button onClick={save}>Salvar</Button>
         </div>
       </div>
@@ -234,6 +248,35 @@ export default function OrderDetails() {
               <div className="col-span-8" />
               <div className="col-span-2 text-right font-semibold self-center">Total</div>
               <div className="col-span-2 font-semibold self-center text-right">{formatBRL(total)}</div>
+            </div>
+
+            <div className="grid grid-cols-12 gap-2 border-t pt-4">
+              <div className="col-span-12 font-semibold">Pagamento</div>
+              <div className="col-span-2 self-center">Pago?</div>
+              <div className="col-span-2 flex items-center gap-2">
+                <Switch checked={Boolean(order.paid)} onCheckedChange={(v) => setField("paid", v)} />
+                {order.paid && order.paymentDate && (
+                  <span className="text-xs text-muted-foreground">em {new Date(order.paymentDate).toLocaleString()}</span>
+                )}
+              </div>
+              <div className="col-span-2 self-center text-right">Recebido</div>
+              <div className="col-span-2">
+                <Input type="number" step="0.01" min="0" value={order.paymentReceived ?? 0} onChange={(e) => setField("paymentReceived", Number(e.target.value))} />
+              </div>
+              <div className="col-span-2 self-center text-right">Forma</div>
+              <div className="col-span-2">
+                <Select value={order.paymentMethod || undefined} onValueChange={(v) => setField("paymentMethod", v as any)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecione" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="dinheiro">Dinheiro</SelectItem>
+                    <SelectItem value="pix">PIX</SelectItem>
+                    <SelectItem value="cartao">Cartão</SelectItem>
+                    <SelectItem value="transferencia">Transferência</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           </div>
         </div>

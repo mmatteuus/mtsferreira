@@ -56,6 +56,9 @@ export default function OrderPrint() {
           <p>Desconto: {formatBRL(order.discount || 0)}</p>
           <p>Outros: {formatBRL(order.additionalFees || 0)}</p>
           <p className="font-semibold">Total: {formatBRL(total)}</p>
+          {order.paid && (
+            <p className="mt-1">Status do pagamento: Pago{order.paymentDate ? ` em ${new Date(order.paymentDate).toLocaleString()}` : ''}{order.paymentMethod ? ` (${order.paymentMethod.toUpperCase()})` : ''}</p>
+          )}
         </div>
         <div className="no-print mt-6">
           <button onClick={() => window.print()} className="px-4 py-2 border rounded">Imprimir</button>

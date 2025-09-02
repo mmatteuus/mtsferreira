@@ -63,6 +63,11 @@ export type ServiceOrder = {
   attachments?: Attachment[];
   customerSignatureDataUrl?: string; // assinatura do cliente (base64)
   signedAt?: string; // data da assinatura
+  // Pagamentos
+  paymentReceived?: number; // valor recebido
+  paymentMethod?: "pix" | "dinheiro" | "cartao" | "transferencia";
+  paid?: boolean; // flag de pago
+  paymentDate?: string; // data do pagamento
 };
 
 export type WithTimestamps<T> = T & { createdAt: string; updatedAt: string };

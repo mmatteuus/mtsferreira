@@ -15,6 +15,7 @@ export default function OrderReceipt() {
   if (!order) return <div>O.S não encontrada</div>;
 
   const total = calcOrderTotal(order);
+  const received = typeof order.paymentReceived === 'number' ? order.paymentReceived! : total;
 
   return (
     <div className="p-6 print:p-0 bg-white">
@@ -29,7 +30,11 @@ export default function OrderReceipt() {
           <p><strong>Data:</strong> {new Date().toLocaleString()}</p>
           <p><strong>Cliente:</strong> {client?.name || order.clientId}</p>
         </div>
-        <p className="mt-4 text-sm">Recebi de {client?.name || order.clientId} a quantia de <strong>{formatBRL(total)}</strong> referente aos serviços/produtos descritos na O.S {order.number}.</p>
+        <p className="mt-4 text-sm">Recebi de {client?.name || order.clientId} a quantia de <strong>{formatBRL(received)}</strong> referente aos serviços/produtos descritos na O.S {order.number}.</p>
+        <div className="mt-2 text-sm">
+          {order.paymentMethod && <p><strong>Forma de pagamento:</strong> {order.paymentMethod.toUpperCase()}</p>}
+          {order.paid && order.paymentDate && <p><strong>Pago em:</strong> {new Date(order.paymentDate).toLocaleString()}</p>}
+        </div>
         <div className="mt-6 flex flex-col items-center">
           {order.customerSignatureDataUrl ? (
             <img src={order.customerSignatureDataUrl} alt="Assinatura" className="h-24 object-contain" />
