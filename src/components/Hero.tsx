@@ -14,10 +14,10 @@ const Hero = () => {
     window.open('https://wa.me/5563992476987', '_blank');
   };
   return <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-dark opacity-90" />
+      <div className="absolute inset-0 bg-gradient-dark opacity-90" aria-hidden="true" />
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
       backgroundImage: `url(${heroImage})`
-    }} />
+    }} role="img" aria-label="Imagem de um desenvolvedor programando no computador" />
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center animate-fade-in">
@@ -73,5 +73,6 @@ const Hero = () => {
         </div>
       </div>
     </section>;
-};
-export default Hero;
+  };
+
+  export default Hero;
